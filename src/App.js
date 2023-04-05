@@ -3,6 +3,7 @@ import './App.css';
 import HomeScreen from './screens/HomeScreen';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginScreen from './screens/LoginScreen';
+import ProfileScreen from './screens/ProfileScreen';
 import { auth } from './firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +21,7 @@ function App() {
           email: userAuth.email,
         }))
       } else {
-        dispatch(logout);
+        dispatch(logout());
       }
     })
     return unsubscribe;
@@ -32,6 +33,7 @@ function App() {
           <LoginScreen />
         ) : (
           <Routes>
+            <Route path="/profile" element={<ProfileScreen />}/>
             <Route path="/" element={<HomeScreen />}/>
           </Routes>
         )}
